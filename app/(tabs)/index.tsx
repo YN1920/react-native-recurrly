@@ -1,11 +1,12 @@
 import { Text, View, Pressable } from "react-native";
 import { Link, useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
     const router = useRouter();
 
     return (
-        <View className="flex-1 items-center justify-center bg-background">
+        <SafeAreaView className="flex-1 items-center justify-center bg-background p-5">
             <Text className="text-xl font-bold text-success">
                 Native App!
             </Text>
@@ -37,7 +38,6 @@ export default function App() {
                 <Text>Spotify Subscriptions</Text>
             </Pressable>
 
-            {/* ✅ FIXED LINK */}
             <Link
                 href={{
                     pathname: "/subscriptions/[id]",
@@ -51,6 +51,6 @@ export default function App() {
                     </Text>
                 </Pressable>
             </Link>
-        </View>
+        </SafeAreaView>
     );
 }
