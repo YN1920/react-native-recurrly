@@ -1,4 +1,4 @@
-import { Text, View, Pressable } from "react-native";
+import { Text, Pressable } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -6,7 +6,7 @@ export default function App() {
     const router = useRouter();
 
     return (
-        <SafeAreaView className="flex-1 items-center justify-center bg-background p-5">
+        <SafeAreaView className="flex-1 p-5 bg-background">
             <Text className="text-xl font-bold text-success">
                 Native App!
             </Text>
