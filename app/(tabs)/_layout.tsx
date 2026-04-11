@@ -2,10 +2,9 @@ import { Tabs } from "expo-router";
 import { View, Image } from "react-native";
 import clsx from "clsx";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
+import { TabIconProps } from "@/type";
 import { tabs } from "@/assets/constants/data";
 import { colors, components } from "@/assets/constants/theme";
-import { TabIconProps } from "@/type";
 
 const tabBar = components.tabBar;
 
