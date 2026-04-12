@@ -1,20 +1,21 @@
 import { Tabs } from "expo-router";
 import { View, Image } from "react-native";
-import { tabs } from "@/assets/constants/data";
-import { colors, components } from "@/assets/constants/theme";
-import { TabIconProps } from "@/type";
 import clsx from "clsx";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { TabIconProps } from "@/type";
+import { tabs } from "@/assets/constants/data";
+import { colors, components } from "@/assets/constants/theme";
 
 const tabBar = components.tabBar;
 
+// 🔹 Tab Icon Component
 const TabIcon = ({ focused, icon }: TabIconProps) => {
     return (
         <View className="items-center justify-center">
             <View
                 className={clsx(
                     "items-center justify-center rounded-full",
-                    focused ? "bg-[#ea7a53] w-11 h-11" : "w-11 h-11"
+                    focused ? "bg-accent w-11 h-11" : "w-11 h-11"
                 )}
             >
                 <Image
@@ -22,7 +23,7 @@ const TabIcon = ({ focused, icon }: TabIconProps) => {
                     style={{
                         width: 20,
                         height: 20,
-                        tintColor: focused ? "#fff" : "#9ca3af", // gray when inactive
+                        tintColor: focused ? "#fff" : "#9ca3af",
                     }}
                 />
             </View>
@@ -30,6 +31,7 @@ const TabIcon = ({ focused, icon }: TabIconProps) => {
     );
 };
 
+// 🔹 Main Tab Layout
 const TabLayout = () => {
     const insets = useSafeAreaInsets();
 
