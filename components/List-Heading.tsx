@@ -11,14 +11,16 @@ const ListHeading = ({ title, onPress }: ListHeadingProps) => { // 🔹 Destruct
                 {title}
             </Text>
 
-            <TouchableOpacity
-                onPress={onPress}
-                className="px-4 py-2 rounded-full border border-black/20"
-            >
-                <Text className="text-sm font-sans-medium text-primary">
-                    View all
-                </Text>
-            </TouchableOpacity>
+            {onPress && (
+                <TouchableOpacity
+                    onPress={onPress}
+                    className="px-4 py-2 rounded-full border border-black/20"
+                >
+                    <Text className="text-sm font-sans-medium text-primary">
+                        View all
+                    </Text>
+                </TouchableOpacity>
+            )}
 
         </View>
     );

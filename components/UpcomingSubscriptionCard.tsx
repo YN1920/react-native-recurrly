@@ -14,17 +14,17 @@ const UpcomingSubscriptionCard = ({
             <View className="flex-row items-center justify-between">
                 <View
                     style={{
-                        backgroundColor: '#f6eecf', // Subtle cream background
-                        padding: 6,                 // Space between icon and background edge
-                        borderRadius: 12,           // Slightly rounded corners
-                        alignItems: 'center',       // Center the icon horizontally
-                        justifyContent: 'center'    // Center the icon vertically
+                        backgroundColor: '#f6eecf',
+                        padding: 6,
+                        borderRadius: 12,
+                        alignItems: 'center',
+                        justifyContent: 'center'
                     }}
                 >
                     <Image
                         source={icon}
                         style={{
-                            width: 40, // Reduced from 45 to fit within the padded container
+                            width: 40,
                             height: 40,
                             resizeMode: 'contain',
                             tintColor: '#081126',
@@ -40,7 +40,9 @@ const UpcomingSubscriptionCard = ({
                     <Text className="text-sm font-sans text-zinc-500" numberOfLines={1}>
                         {daysLeft > 1
                             ? `${daysLeft} days left`
-                            : "Last day"}
+                            : daysLeft === 1
+                                ? "Last day"
+                                : "Due now"}
                     </Text>
                 </View>
             </View>

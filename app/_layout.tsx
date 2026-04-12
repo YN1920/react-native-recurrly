@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 import "@/global.css";
 
 export default function RootLayout() {
-    const [fontsLoaded] = useFonts({
+    const [fontsLoaded, fontError] = useFonts({
         "sans-bold": require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
         "sans-regular": require("../assets/fonts/PlusJakartaSans-Regular.ttf"),
         "sans-medium": require("../assets/fonts/PlusJakartaSans-Medium.ttf"),
@@ -12,8 +12,6 @@ export default function RootLayout() {
         "sans-light": require("../assets/fonts/PlusJakartaSans-Light.ttf"),
         "sans-semibold": require("../assets/fonts/PlusJakartaSans-SemiBold.ttf"),
     });
-
-    if (!fontsLoaded) return null;
 
     return (
         <SafeAreaProvider>

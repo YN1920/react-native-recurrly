@@ -1,4 +1,4 @@
-import { Text, View, Image, FlatList } from "react-native";
+import { Text, View, Image, FlatList, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/assets/constants/images";
 import {
@@ -15,6 +15,10 @@ import ListHeading from "@/components/List-Heading";
 import SubscriptionCard from "@/components/SubscriptionCard";
 import { useState } from "react";
 
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const SIDE_INSET = 20;
+const SPACING = 12;
+
 export default function App() {
     const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<string | null>(null);
 
@@ -25,7 +29,6 @@ export default function App() {
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
 
-                // ✅ HEADER SECTION
                 ListHeaderComponent={
                     <>
                         {/* HEADER */}
@@ -82,22 +85,31 @@ export default function App() {
                                 onPress={() => console.log("View all upcoming")}
                             />
 
-                            <FlatList
-                                data={UPCOMING_SUBSCRIPTIONS}
-                                keyExtractor={(item) => item.id}
-                                horizontal
-                                decelerationRate="fast"
-                                snapToAlignment="start"
-                                showsHorizontalScrollIndicator={false}
-                                renderItem={({ item }) => (
-                                    <UpcomingSubscriptionCard {...item} />
-                                )}
-                                contentContainerStyle={{
-                                    paddingLeft: 20,   // ✅ FIX: gives breathing space at start
-                                    paddingRight: 10,  // optional: softer ending
-                                    gap: 12
+                            {/* ✅ CLIPPING CONTAINER */}
+                            <View
+                                style={{
+                                    width: SCREEN_WIDTH - SIDE_INSET * 2,
+                                    alignSelf: "center",
+                                    overflow: "hidden",
                                 }}
-                            />
+                            >
+                                <FlatList
+                                    data={UPCOMING_SUBSCRIPTIONS}
+                                    keyExtractor={(item) => item.id}
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}
+                                    renderItem={({ item }) => (
+                                        <UpcomingSubscriptionCard {...item} />
+                                    )}
+                                    contentContainerStyle={{
+                                        paddingHorizontal: SIDE_INSET,
+                                        gap: SPACING,
+                                    }}
+                                    style={{
+                                        marginHorizontal: -SIDE_INSET, // ✅ pushes cards outward
+                                    }}
+                                />
+                            </View>
                         </View>
 
                         {/* ALL SUBSCRIPTIONS TITLE */}
@@ -105,7 +117,6 @@ export default function App() {
                     </>
                 }
 
-                // ✅ MAIN LIST
                 renderItem={({ item }) => (
                     <SubscriptionCard
                         {...item}
@@ -118,17 +129,14 @@ export default function App() {
                     />
                 )}
 
-                // ✅ CLEAN SPACING BETWEEN CARDS
                 ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
 
-                // ✅ EMPTY STATE
                 ListEmptyComponent={
                     <Text className="text-center mt-10 text-gray-500">
                         No subscriptions yet.
                     </Text>
                 }
 
-                // ✅ BOTTOM PADDING
                 contentContainerStyle={{
                     paddingBottom: 120
                 }}
