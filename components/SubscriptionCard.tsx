@@ -83,30 +83,52 @@ const SubscriptionCard = ({
             {/* EXPANDED CONTENT */}
             {expanded && (
                 <View className="mt-4 gap-3">
-                    <Text className="text-sm">
-                        <Text className="font-sans-semibold">Payment: </Text>
-                        {paymentMethod}
-                    </Text>
 
-                    <Text className="text-sm">
-                        <Text className="font-sans-semibold">Category: </Text>
-                        {category}
-                    </Text>
+                    {/* PAYMENT */}
+                    {!!paymentMethod?.trim() && (
+                        <Text className="text-sm">
+                            <Text className="font-sans-semibold">Payment: </Text>
+                            {paymentMethod.trim() || "Not provided"}
+                        </Text>
+                    )}
 
-                    <Text className="text-sm">
-                        <Text className="font-sans-semibold">Started: </Text>
-                        {formatSubscriptionDateTime(startDate)}
-                    </Text>
+                    {/* CATEGORY / PLAN */}
+                    {!!(category?.trim() || plan?.trim()) && (
+                        <Text className="text-sm">
+                            <Text className="font-sans-semibold">Category: </Text>
+                            {(category?.trim() || plan?.trim()) ?? "Not provided"}
+                        </Text>
+                    )}
 
-                    <Text className="text-sm">
-                        <Text className="font-sans-semibold">Renewal: </Text>
-                        {formatSubscriptionDateTime(renewalDate)}
-                    </Text>
+                    {/* START DATE */}
+                    {!!startDate && (
+                        <Text className="text-sm">
+                            <Text className="font-sans-semibold">Started: </Text>
+                            {startDate
+                                ? formatSubscriptionDateTime(startDate)
+                                : "Not provided"}
+                        </Text>
+                    )}
 
-                    <Text className="text-sm">
-                        <Text className="font-sans-semibold">Status: </Text>
-                        {formatStatusLabel(status)}
-                    </Text>
+                    {/* RENEWAL */}
+                    {!!renewalDate && (
+                        <Text className="text-sm">
+                            <Text className="font-sans-semibold">Renewal: </Text>
+                            {renewalDate
+                                ? formatSubscriptionDateTime(renewalDate)
+                                : "Not provided"}
+                        </Text>
+                    )}
+
+                    {/* STATUS */}
+                    {!!status && (
+                        <Text className="text-sm">
+                            <Text className="font-sans-semibold">Status: </Text>
+                            {status
+                                ? formatStatusLabel(status)
+                                : "Not provided"}
+                        </Text>
+                    )}
                 </View>
             )}
         </Pressable>

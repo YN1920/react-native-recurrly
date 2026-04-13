@@ -113,7 +113,7 @@ export default function App() {
                         </View>
 
                         {/* ALL SUBSCRIPTIONS TITLE */}
-                        <ListHeading title="All Subscription" />
+                        <ListHeading title="All Subscriptions" />
                     </>
                 }
 
