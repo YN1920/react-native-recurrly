@@ -41,3 +41,8 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Keep build-critical app assets and the lockfile available even if an external
+# tool layers broader ignore rules on top of this repo.
+!assets/images/icon.png
+!package-lock.json

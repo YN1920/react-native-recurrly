@@ -13,87 +13,137 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type AuthScreenProps = {
-    eyebrow: string;
+    mode: "sign-in" | "sign-up";
+    eyebrow?: string;
     title: string;
     subtitle: string;
-    alternateLabel: string;
-    alternateHref: "/(auth)/sign-in" | "/(auth)/sign-up";
-    alternateCta: string;
     children: React.ReactNode;
 };
 
 export default function AuthScreen({
+    mode,
     eyebrow,
     title,
     subtitle,
-    alternateLabel,
-    alternateHref,
-    alternateCta,
     children,
 }: AuthScreenProps) {
+    const hasHeaderContent = Boolean(eyebrow || title || subtitle);
+
     return (
-        <SafeAreaView className="flex-1 bg-background">
+        <SafeAreaView className="flex-1 bg-accent">
             <KeyboardAvoidingView
                 className="flex-1"
                 behavior={Platform.OS === "ios" ? "padding" : undefined}
             >
                 <ScrollView
+                    className="bg-background"
                     bounces={false}
                     keyboardShouldPersistTaps="handled"
                     contentContainerStyle={{ flexGrow: 1 }}
                 >
-                    <View className="flex-1 px-5 pb-8">
+                    <View className="flex-1 pb-6">
                         <View
-                            className="overflow-hidden bg-accent px-6 pb-8 pt-6"
+                            className="overflow-hidden bg-accent px-6 pb-7 pt-5"
                             style={{
-                                borderBottomLeftRadius: 40,
+                                borderBottomLeftRadius: 28,
                                 borderBottomRightRadius: 28,
                             }}
                         >
                             <View className="flex-row items-center gap-4">
                                 <Image
                                     source={images.icon}
-                                    className="h-16 w-16 rounded-[20px] bg-card"
+                                    className="h-14 w-14 rounded-[16px] bg-card"
                                     resizeMode="contain"
                                 />
 
                                 <View className="flex-1">
-                                    <Text className="font-sans-bold text-[24px] text-white">
+                                    <Text className="font-sans-bold text-[26px] text-white">
                                         Velo
                                     </Text>
-                                    <Text className="mt-1 font-sans-medium text-[14px] text-white/85">
-                                        Stay ahead of every renewal with one secure account.
+                                    <Text className="mt-1 font-sans-medium text-[14px] text-white/90">
+                                        Smart Billing
                                     </Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View className="-mt-4 flex-1 rounded-4xl border border-border bg-background px-6 pb-8 pt-7">
-                            <Text className="text-center font-sans-semibold text-[13px] uppercase tracking-[1.8px] text-accent">
-                                {eyebrow}
+                        <View className="items-center px-5">
+                            <Text className="mt-7 text-center font-sans-extrabold text-[34px] leading-10 text-primary">
+                                Get Started Now
                             </Text>
-                            <Text className="mt-3 text-center font-sans-extrabold text-[32px] leading-9.5 text-primary">
-                                {title}
+                            <Text className="mt-3 max-w-[280px] text-center font-sans-medium text-[15px] leading-6 text-primary/70">
+                                Create an account or log in to explore about our app
                             </Text>
-                            <Text className="mt-3 text-center font-sans-medium text-[15px] leading-6 text-primary/70">
-                                {subtitle}
-                            </Text>
+                        </View>
 
-                            <View className="mt-8 rounded-[28px] border border-border bg-card px-5 py-5">
-                                {children}
-                            </View>
-
-                            <View className="mt-6 flex-row items-center justify-center gap-1">
-                                <Text className="font-sans-medium text-[14px] text-primary/70">
-                                    {alternateLabel}
-                                </Text>
-                                <Link href={alternateHref} asChild>
-                                    <Pressable hitSlop={8}>
-                                        <Text className="font-sans-bold text-[14px] text-accent">
-                                            {alternateCta}
+                        <View className="mx-5 mt-6 rounded-full bg-[#f3f2f8] p-1.5">
+                            <View className="flex-row gap-2">
+                                <Link href="/(auth)/sign-up" asChild>
+                                    <Pressable
+                                        className={[
+                                            "min-h-12 flex-1 items-center justify-center rounded-full",
+                                            mode === "sign-up" ? "bg-accent" : "bg-transparent",
+                                        ].join(" ")}
+                                    >
+                                        <Text
+                                            className={[
+                                                "font-sans-semibold text-[15px]",
+                                                mode === "sign-up" ? "text-white" : "text-primary",
+                                            ].join(" ")}
+                                        >
+                                            Sign Up
                                         </Text>
                                     </Pressable>
                                 </Link>
+
+                                <Link href="/(auth)/sign-in" asChild>
+                                    <Pressable
+                                        className={[
+                                            "min-h-12 flex-1 items-center justify-center rounded-full",
+                                            mode === "sign-in" ? "bg-accent" : "bg-transparent",
+                                        ].join(" ")}
+                                    >
+                                        <Text
+                                            className={[
+                                                "font-sans-semibold text-[15px]",
+                                                mode === "sign-in" ? "text-white" : "text-primary",
+                                            ].join(" ")}
+                                        >
+                                            Log In
+                                        </Text>
+                                    </Pressable>
+                                </Link>
+                            </View>
+                        </View>
+
+                        <View className="mx-5 mt-5 flex-1 rounded-[32px] border border-border bg-card px-5 pb-5 pt-5">
+                            {hasHeaderContent ? (
+                                <View>
+                                    {eyebrow ? (
+                                        <Text className="text-center font-sans-semibold text-[13px] uppercase tracking-[1.8px] text-accent">
+                                            {eyebrow}
+                                        </Text>
+                                    ) : null}
+                                    {title ? (
+                                        <Text className="mt-3 text-center font-sans-extrabold text-[30px] leading-9 text-primary">
+                                            {title}
+                                        </Text>
+                                    ) : null}
+                                    {subtitle ? (
+                                        <Text className="mt-3 text-center font-sans-medium text-[15px] leading-6 text-primary/70">
+                                            {subtitle}
+                                        </Text>
+                                    ) : null}
+                                </View>
+                            ) : null}
+
+                            <View
+                                className={[
+                                    "rounded-[24px] bg-background px-4 py-4",
+                                    hasHeaderContent ? "mt-6" : "mt-0",
+                                ].join(" ")}
+                            >
+                                {children}
                             </View>
                         </View>
                     </View>

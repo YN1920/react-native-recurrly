@@ -110,16 +110,14 @@ export default function SignUp() {
 
     return (
         <AuthScreen
-            eyebrow={requiresVerification ? "Verify your email" : "Create account"}
-            title={requiresVerification ? "Finish your sign up" : "Start with clarity"}
+            mode="sign-up"
+            eyebrow={requiresVerification ? "Verify your email" : undefined}
+            title={requiresVerification ? "Finish your sign up" : ""}
             subtitle={
                 requiresVerification
                     ? "Confirm your email to activate your account and keep your billing data protected."
-                    : "Create your secure Velo account to track subscriptions, renewals, and upcoming charges."
+                    : ""
             }
-            alternateLabel="Already have an account?"
-            alternateHref="/(auth)/sign-in"
-            alternateCta="Sign in"
         >
             <View className="gap-5">
                 {requiresVerification ? (
@@ -150,7 +148,7 @@ export default function SignUp() {
                         )}
 
                         <Pressable
-                            className="mt-1 min-h-14 items-center justify-center rounded-[18px] bg-accent"
+                            className="mt-1 min-h-12 items-center justify-center rounded-[18px] bg-accent"
                             onPress={handleVerify}
                             disabled={isSubmitting || fetchStatus === "fetching"}
                         >
@@ -218,7 +216,7 @@ export default function SignUp() {
                         )}
 
                         <Pressable
-                            className="mt-1 min-h-14 items-center justify-center rounded-[18px] bg-accent"
+                            className="mt-1 min-h-12 items-center justify-center rounded-[18px] bg-accent"
                             onPress={handleSubmit}
                             disabled={isSubmitting || fetchStatus === "fetching"}
                         >
