@@ -1,11 +1,11 @@
+import { useUser } from "@clerk/expo";
 import { Text, View, Image, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/assets/constants/images";
 import {
     HOME_BALANCE,
     HOME_SUBSCRIPTIONS,
-    HOME_USER,
-    UPCOMING_SUBSCRIPTIONS
+    UPCOMING_SUBSCRIPTIONS,
 } from "@/assets/constants/data";
 import { icons } from "@/assets/constants/icons";
 import { formatCurrency } from "@/lib/utils";
@@ -16,7 +16,16 @@ import SubscriptionCard from "@/components/SubscriptionCard";
 import { useState } from "react";
 
 export default function App() {
+    const { user } = useUser();
     const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<string | null>(null);
+    const displayName =
+        user?.fullName ||
+        user?.firstName ||
+        user?.primaryEmailAddress?.emailAddress ||
+        "Welcome";
+    const avatarSource = user?.imageUrl
+        ? { uri: user.imageUrl }
+        : images.avatar;
 
     return (
         <SafeAreaView className="flex-1 bg-background">
@@ -24,20 +33,17 @@ export default function App() {
                 data={HOME_SUBSCRIPTIONS}
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
-
-                // ✅ HEADER SECTION
                 ListHeaderComponent={
                     <>
-                        {/* HEADER */}
                         <View className="px-5 pt-5">
-                            <View className="flex-row items-center justify-between mb-8">
-                                <View className="flex-row items-center flex-1">
+                            <View className="mb-8 flex-row items-center justify-between">
+                                <View className="flex-1 flex-row items-center">
                                     <Image
-                                        source={images.avatar}
-                                        className="w-12 h-12 rounded-full"
+                                        source={avatarSource}
+                                        className="h-12 w-12 rounded-full"
                                     />
                                     <Text className="ml-4 text-2xl font-sans-bold text-primary">
-                                        {HOME_USER.name}
+                                        {displayName}
                                     </Text>
                                 </View>
 
@@ -46,17 +52,16 @@ export default function App() {
                                     style={{
                                         width: 24,
                                         height: 24,
-                                        tintColor: "#081126"
+                                        tintColor: "#081126",
                                     }}
                                 />
                             </View>
 
-                            {/* BALANCE CARD */}
                             <View
-                                className="my-3 min-h-40 justify-between gap-5 p-6 bg-accent"
+                                className="my-3 min-h-40 justify-between gap-5 bg-accent p-6"
                                 style={{
                                     borderBottomLeftRadius: 40,
-                                    borderTopRightRadius: 40
+                                    borderTopRightRadius: 40,
                                 }}
                             >
                                 <Text className="text-xl font-sans-semibold text-white/80">
@@ -68,14 +73,13 @@ export default function App() {
                                         {formatCurrency(HOME_BALANCE.amount)}
                                     </Text>
 
-                                    <Text className="text-lg font-sans-medium text-white mb-1">
+                                    <Text className="mb-1 text-lg font-sans-medium text-white">
                                         {dayjs(HOME_BALANCE.nextRenewalDate).format("MM/DD")}
                                     </Text>
                                 </View>
                             </View>
                         </View>
 
-                        {/* UPCOMING */}
                         <View className="mb-6">
                             <ListHeading
                                 title="Upcoming"
@@ -86,26 +90,22 @@ export default function App() {
                                 data={UPCOMING_SUBSCRIPTIONS}
                                 keyExtractor={(item) => item.id}
                                 horizontal
-                                decelerationRate="fast"
-                                snapToAlignment="start"
                                 showsHorizontalScrollIndicator={false}
+                                nestedScrollEnabled
+                                directionalLockEnabled
                                 renderItem={({ item }) => (
                                     <UpcomingSubscriptionCard {...item} />
                                 )}
                                 contentContainerStyle={{
-                                    paddingLeft: 20,   // ✅ FIX: gives breathing space at start
-                                    paddingRight: 10,  // optional: softer ending
-                                    gap: 12
+                                    paddingHorizontal: 20,
+                                    gap: 12,
                                 }}
                             />
                         </View>
 
-                        {/* ALL SUBSCRIPTIONS TITLE */}
-                        <ListHeading title="All Subscription" />
+                        <ListHeading title="All Subscriptions" />
                     </>
                 }
-
-                // ✅ MAIN LIST
                 renderItem={({ item }) => (
                     <SubscriptionCard
                         {...item}
@@ -117,22 +117,15 @@ export default function App() {
                         }
                     />
                 )}
-
-                // ✅ CLEAN SPACING BETWEEN CARDS
                 ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-
-                // ✅ EMPTY STATE
                 ListEmptyComponent={
-                    <Text className="text-center mt-10 text-gray-500">
+                    <Text className="mt-10 text-center text-gray-500">
                         No subscriptions yet.
                     </Text>
                 }
-
-                // ✅ BOTTOM PADDING
                 contentContainerStyle={{
-                    paddingBottom: 120
+                    paddingBottom: 120,
                 }}
-
                 extraData={expandedSubscriptionId}
             />
         </SafeAreaView>

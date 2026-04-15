@@ -61,47 +61,9 @@
         @apply size-6;
     }
 
-    /*.home-header {*/
-    /*    @apply mb-2.5 flex-row items-center justify-between;*/
-    /*}*/
-
-    /*.home-add-icon {*/
-    /*    @apply ml-4 size-60;*/
-    /*}*/
-
     .home-user {
         @apply flex-row items-center;
     }
-
-    /*.home-avatar {*/
-    /*    @apply size-16 rounded-full;*/
-    /*}*/
-
-    /*.home-username {*/
-    /*    @apply ml-4 text-2xl font-sans-bold text-primary;*/
-    /*}*/
-
-
-    /*.home-balance-card {*/
-    /*    @apply my-3 min-h-[180px] flex-col justify-between gap-5 rounded-bl-[40px] rounded-tr-[40px] bg-accent p-6;*/
-    /*}*/
-
-    /*.home-balance-label {*/
-    /*    @apply text-xl font-sans-semibold text-white/80;*/
-    /*}*/
-
-    /*.home-balance-row {*/
-    /*    @apply flex-row items-center justify-between;*/
-    /*}*/
-
-    /*.home-balance-amount {*/
-    /*    @apply text-4xl font-sans-extrabold text-white;*/
-    /*}*/
-
-    /*.home-balance-date {*/
-    /*    @apply text-lg font-sans-medium text-white;*/
-    /*}*/
-
 
     .list-head {
         @apply flex m-5 flex-row items-center justify-center;

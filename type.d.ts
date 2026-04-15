@@ -32,7 +32,7 @@ export interface Subscription {
 export interface SubscriptionCardProps extends Omit<Subscription, "id"> {
     expanded: boolean;
     onPress: () => void;
-    onCancelPress: () => void;
+    onCancelPress?: () => void;
     isCancelling?: boolean;
 }
 
