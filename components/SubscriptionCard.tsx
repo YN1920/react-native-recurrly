@@ -2,7 +2,6 @@ import { View, Text, Image, Pressable, LayoutAnimation, Platform, UIManager } fr
 import React from "react";
 import { SubscriptionCardProps } from "@/type";
 import { formatCurrency, formatStatusLabel, formatSubscriptionDateTime } from "@/lib/utils";
-import clsx from "clsx";
 
 // Enable animation for Android
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {

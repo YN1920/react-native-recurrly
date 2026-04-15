@@ -14,5 +14,8 @@
     "expo-env.d.ts",
     "nativewind-env.d.ts",
     "image.d.ts"
+  ],
+  "exclude": [
+    "app-example"
   ]
 }
