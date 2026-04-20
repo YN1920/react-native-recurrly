@@ -1,22 +1,22 @@
-import { useUser } from "@clerk/expo";
-import { Text, View, Image, FlatList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {useUser} from "@clerk/expo";
+import {Text, View, Image, FlatList} from "react-native";
+import {SafeAreaView} from "react-native-safe-area-context";
 import images from "@/assets/constants/images";
 import {
     HOME_BALANCE,
     HOME_SUBSCRIPTIONS,
     UPCOMING_SUBSCRIPTIONS,
 } from "@/assets/constants/data";
-import { icons } from "@/assets/constants/icons";
-import { formatCurrency } from "@/lib/utils";
+import {icons} from "@/assets/constants/icons";
+import {formatCurrency} from "@/lib/utils";
 import dayjs from "dayjs";
 import UpcomingSubscriptionCard from "@/components/UpcomingSubscriptionCard";
 import ListHeading from "@/components/List-Heading";
 import SubscriptionCard from "@/components/SubscriptionCard";
-import { useState } from "react";
+import {useState} from "react";
 
 export default function App() {
-    const { user } = useUser();
+    const {user} = useUser();
     const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<string | null>(null);
     const displayName =
         user?.fullName ||
@@ -24,7 +24,7 @@ export default function App() {
         user?.primaryEmailAddress?.emailAddress ||
         "Welcome";
     const avatarSource = user?.imageUrl
-        ? { uri: user.imageUrl }
+        ? {uri: user.imageUrl}
         : images.avatar;
 
     return (
@@ -93,7 +93,7 @@ export default function App() {
                                 showsHorizontalScrollIndicator={false}
                                 nestedScrollEnabled
                                 directionalLockEnabled
-                                renderItem={({ item }) => (
+                                renderItem={({item}) => (
                                     <UpcomingSubscriptionCard {...item} />
                                 )}
                                 contentContainerStyle={{
@@ -103,10 +103,10 @@ export default function App() {
                             />
                         </View>
 
-                        <ListHeading title="All Subscriptions" />
+                        <ListHeading title="All Subscriptions"/>
                     </>
                 }
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                     <SubscriptionCard
                         {...item}
                         expanded={expandedSubscriptionId === item.id}
@@ -117,7 +117,7 @@ export default function App() {
                         }
                     />
                 )}
-                ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+                ItemSeparatorComponent={() => <View style={{height: 12}}/>}
                 ListEmptyComponent={
                     <Text className="mt-10 text-center text-gray-500">
                         No subscriptions yet.

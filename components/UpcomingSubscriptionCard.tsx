@@ -9,6 +9,7 @@ const UpcomingSubscriptionCard = ({
                                       icon,
                                       currency
                                   }: UpcomingSubscription) => {
+
     return (
         <View className="p-4 border-2 border-zinc-400 rounded-3xl w-40 gap-5">
             <View className="flex-row items-center justify-between">

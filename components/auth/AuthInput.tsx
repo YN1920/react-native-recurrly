@@ -27,7 +27,7 @@ export default function AuthInput({
 
             <TextInput
                 className={[
-                    "rounded-[18px] border border-border bg-card px-4 py-4 font-sans-medium text-[15px] text-primary",
+                    "rounded-[18px] border border-border bg-card px-4 py-3.5 font-sans-medium text-[15px] text-primary",
                     error ? "border-destructive" : "",
                     className ?? "",
                 ].join(" ")}

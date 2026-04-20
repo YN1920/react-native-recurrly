@@ -119,16 +119,14 @@ export default function SignIn() {
 
     return (
         <AuthScreen
-            eyebrow={needsEmailCode ? "Verify" : "Welcome back"}
-            title={needsEmailCode ? "Check your inbox" : "Sign in to Velo"}
+            mode="sign-in"
+            eyebrow={needsEmailCode ? "Verify" : undefined}
+            title={needsEmailCode ? "Check your inbox" : ""}
             subtitle={
                 needsEmailCode
                     ? "Enter the 6-digit code we emailed you to finish signing in securely."
-                    : "Continue managing subscriptions, renewals, and spend from one secure workspace."
+                    : ""
             }
-            alternateLabel="New to Velo?"
-            alternateHref="/(auth)/sign-up"
-            alternateCta="Create an account"
         >
             <View className="gap-5">
                 {needsEmailCode ? (
@@ -155,7 +153,7 @@ export default function SignIn() {
                         ) : null}
 
                         <Pressable
-                            className="mt-1 min-h-14 items-center justify-center rounded-[18px] bg-accent"
+                            className="mt-1 min-h-12 items-center justify-center rounded-[18px] bg-accent"
                             onPress={handleVerify}
                             disabled={isSubmitting || fetchStatus === "fetching"}
                         >
@@ -223,7 +221,7 @@ export default function SignIn() {
                         )}
 
                         <Pressable
-                            className="mt-1 min-h-14 items-center justify-center rounded-[18px] bg-accent"
+                            className="mt-1 min-h-12 items-center justify-center rounded-[18px] bg-accent"
                             onPress={handleSubmit}
                             disabled={isSubmitting || fetchStatus === "fetching"}
                         >
