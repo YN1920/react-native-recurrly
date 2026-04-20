@@ -21,7 +21,7 @@ export interface Subscription {
     category?: string;
     paymentMethod?: string;
     status?: string; // Fixed typo from 'staus'
-    startDate: string; // Fixed typo from 'startlDate'
+    startDate: string; // Fixed typo from 'startDate'
     price: number;
     currency?: string;
     billing: string;

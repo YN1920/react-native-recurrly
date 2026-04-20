@@ -52,7 +52,7 @@ export default function AuthScreen({
                             <View className="flex-row items-center gap-4">
                                 <Image
                                     source={images.icon}
-                                    className="h-14 w-14 rounded-[16px] bg-card"
+                                    className="h-14 w-14 rounded-2xl bg-card"
                                     resizeMode="contain"
                                 />
 
@@ -71,7 +71,7 @@ export default function AuthScreen({
                             <Text className="mt-7 text-center font-sans-extrabold text-[34px] leading-10 text-primary">
                                 Get Started Now
                             </Text>
-                            <Text className="mt-3 max-w-[280px] text-center font-sans-medium text-[15px] leading-6 text-primary/70">
+                            <Text className="mt-3 max-w-70 text-center font-sans-medium text-[15px] leading-6 text-primary/70">
                                 Create an account or log in to explore about our app
                             </Text>
                         </View>
@@ -116,7 +116,7 @@ export default function AuthScreen({
                             </View>
                         </View>
 
-                        <View className="mx-5 mt-5 flex-1 rounded-[32px] border border-border bg-card px-5 pb-5 pt-5">
+                        <View className="mx-5 mt-5 flex-1 rounded-4xl border border-border bg-card px-5 pb-5 pt-5">
                             {hasHeaderContent ? (
                                 <View>
                                     {eyebrow ? (
@@ -139,7 +139,7 @@ export default function AuthScreen({
 
                             <View
                                 className={[
-                                    "rounded-[24px] bg-background px-4 py-4",
+                                    "rounded-3xl bg-background px-4 py-4",
                                     hasHeaderContent ? "mt-6" : "mt-0",
                                 ].join(" ")}
                             >
